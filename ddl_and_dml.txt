@@ -1,0 +1,40 @@
+---------------------------
+Syntax DDL & DML 
+---------------------------
+
+BEGIN;
+
+-- Create database
+CREATE DATABASE electronics_sales_db;
+
+-- Create table sales (electronics_sales)
+CREATE TABLE electronics_sales (
+    "Customer ID" INT,
+    "Age" INT,
+    "Gender" VARCHAR(10),
+    "Loyalty Member" VARCHAR(10),
+    "Product Type" VARCHAR(50),
+    "SKU" VARCHAR(50),
+    "Rating" INT,
+    "Order Status" VARCHAR(20),
+    "Payment Method" VARCHAR(20),
+    "Total Price" FLOAT,
+    "Unit Price" FLOAT,
+    "Quantity" INT,
+    "Purchase Date" DATE,
+    "Shipping Type" VARCHAR(20),
+    "Add-ons Purchased" VARCHAR(255),
+    "Add-on Total" FLOAT
+);
+
+-- Import raw data ke tabel electronics_sales dari CSV
+COPY electronics_sales("Customer ID", "Age", "Gender", "Loyalty Member", "Product Type", "SKU", 
+                "Rating", "Order Status", "Payment Method", "Total Price", "Unit Price", 
+                "Quantity", "Purchase Date", "Shipping Type", "Add-ons Purchased", "Add-on Total")
+FROM '/opt/airflow/data/raw_data.csv'
+DELIMITER ','
+CSV HEADER;
+
+ROLLBACK;
+
+COMMIT;
